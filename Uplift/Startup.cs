@@ -14,6 +14,8 @@ using Microsoft.Extensions.Hosting;
 using Uplift.DataAccess.Data;
 using Uplift.DataAccess.Data.Repository.IRepository;
 using Uplift.DataAccess.Data.Repository;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using Uplift.Utility;
 
 namespace Uplift
 {
@@ -35,6 +37,8 @@ namespace Uplift
             services.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
+
+            services.AddSingleton<IEmailSender, EmailSender>();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
