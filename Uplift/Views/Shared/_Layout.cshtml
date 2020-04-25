@@ -31,22 +31,28 @@
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-area="Customer" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropDown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Content Managment
-                            </a>
-                            <div class="dropdown-menu bg-secondary" aria-labelledby="navbarDropDown">
-                                <a class="dropdown-item text-light" asp-area="Admin" asp-controller="Category" asp-action="Index">Categories</a>
-                                <a class="dropdown-item text-light" asp-area="Admin" asp-controller="Frequency" asp-action="Index">Frequencies</a>
-                                <a class="dropdown-item text-light" asp-area="Admin" asp-controller="Services" asp-action="Index">Services</a>
-                                <a class="dropdown-item text-light" asp-area="Admin" asp-controller="User" asp-action="Index">Users</a>
-                                <a class="dropdown-item text-light" asp-area="Admin" asp-controller="Orders" asp-action="Index">Orders</a>
-                            </div>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="Customer" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
 
+                        @if (User.IsInRole(SD.Manager) || User.IsInRole(SD.Admin))
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropDown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Content Managment
+                                </a>
+                                <div class="dropdown-menu bg-secondary" aria-labelledby="navbarDropDown">
+                                    <a class="dropdown-item text-light" asp-area="Admin" asp-controller="Category" asp-action="Index">Categories</a>
+                                    <a class="dropdown-item text-light" asp-area="Admin" asp-controller="Frequency" asp-action="Index">Frequencies</a>
+                                    <a class="dropdown-item text-light" asp-area="Admin" asp-controller="Services" asp-action="Index">Services</a>
+                                    
+                                    @if (User.IsInRole(SD.Admin))
+                                    {
+                                        <a class="dropdown-item text-light" asp-area="Admin" asp-controller="User" asp-action="Index">Users</a>
+                                    }
+                                    
+                                    <a class="dropdown-item text-light" asp-area="Admin" asp-controller="Orders" asp-action="Index">Orders</a>
+                                </div>
+                            </li>
+                        }
+                  
                         @if (HttpContextAccessor.HttpContext.Session.GetObject<List<int>>(SD.SessionCart) != null)
                         {
                             <li style="color: white;">
@@ -62,7 +68,7 @@
                         else
                         {
                             <li style="color: white;">
-                                <a href="#" class="nav-link text-white">         
+                                <a href="#" class="nav-link text-white">
                                     <i class="fas fa-shopping-cart"></i> &nbsp; (0)
                                 </a>
                             </li>
