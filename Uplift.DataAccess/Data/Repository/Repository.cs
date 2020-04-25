@@ -37,13 +37,12 @@ namespace Uplift.DataAccess.Data.Repository
             {
                 query = query.Where(filter);
             }
-
-            // Include Properties will be comma seperated
+            //include properties will be comma seperated
             if (includeProperties != null)
             {
                 foreach (var includeProperty in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
                 {
-                    query = query.Include(includeProperties);
+                    query = query.Include(includeProperty);
                 }
             }
 
@@ -51,7 +50,6 @@ namespace Uplift.DataAccess.Data.Repository
             {
                 return orderBy(query).ToList();
             }
-
             return query.ToList();
         }
 
@@ -63,13 +61,12 @@ namespace Uplift.DataAccess.Data.Repository
             {
                 query = query.Where(filter);
             }
-
-            // Include Properties will be comma seperated
+            //include properties will be comma seperated
             if (includeProperties != null)
             {
                 foreach (var includeProperty in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
                 {
-                    query = query.Include(includeProperties);
+                    query = query.Include(includeProperty);
                 }
             }
 
