@@ -111,15 +111,6 @@ namespace Uplift.Areas.Identity.Pages.Account
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
-                    if (! await _roleManager.RoleExistsAsync(SD.Admin))
-                    {
-                        await _roleManager.CreateAsync(new IdentityRole(SD.Admin));
-                    }
-
-                    if (! await _roleManager.RoleExistsAsync(SD.Manager))
-                    {
-                        await _roleManager.CreateAsync(new IdentityRole(SD.Manager));
-                    }
 
                     string role = Request.Form["rdUserRole"].ToString();
 
